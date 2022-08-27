@@ -24,7 +24,11 @@ const Styled = styled.div<StyledProps>`
   flex-grow: 1;
   overflow: auto;
   margin-bottom: 2rem;
-  max-height: 20rem;
+  // max-height: ${({ isMobile }) => (isMobile ? "100%" : "20rem")};
+  height: fill-available;
+
+  ${({ isMobile }) =>
+    isMobile ? "::-webkit-scrollbar { display: none; }" : "padding: 2rem"};
 `;
 
 export default History;

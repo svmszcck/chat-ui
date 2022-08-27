@@ -23,6 +23,7 @@ const Styled = styled.div<StyledProps>`
   padding: 0.5rem;
   border-radius: 5px;
   align-self: ${({ incoming }) => (incoming ? "flex-start" : "flex-end")};
+  margin-bottom: 0.5rem;
 `;
 
 export default Message;

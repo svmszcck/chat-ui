@@ -15,7 +15,7 @@ export const Input: FC<InputProps> = ({ onSubmit }) => {
   return (
     <Styled
       className="input"
-      placeholder="Type your message here..."
+      placeholder="Type your message..."
       autoFocus
       value={message}
       onChange={(e) => setMessage(e.target.value)}
@@ -32,6 +32,7 @@ const Styled = styled.input`
 
   &:focus {
     outline-width: 0;
+    outline: none;
   }
 `;
 

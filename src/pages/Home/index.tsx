@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { useContext, FC } from "react";
 
 import { ChatPanel } from "components";
+import AppContext from "app-context";
 
 import Styled from "./styles";
 
@@ -38,8 +39,10 @@ import Styled from "./styles";
  */
 
 const Home: FC = () => {
+  const { globalState } = useContext(AppContext);
+
   return (
-    <Styled>
+    <Styled isMobile={globalState.isMobile}>
       <ChatPanel />
     </Styled>
   );

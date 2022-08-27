@@ -4,6 +4,7 @@ export const sendMessage = async (client: any, text: string) => {
 
     return response;
   } catch (e) {
+    console.log(e);
     console.log("Message couldn't be sent. Please try again!");
   }
 };

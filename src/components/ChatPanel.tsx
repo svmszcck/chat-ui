@@ -43,8 +43,6 @@ const ChatPanel: FC = () => {
 
     const response = await sendMessage(globalState.socketClient, message);
 
-    console.log("girdiiiii");
-
     if (response) {
       setMessage("");
       updateState({

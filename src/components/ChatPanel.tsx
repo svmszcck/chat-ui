@@ -18,36 +18,30 @@ type StyledProps = {
 
 const ChatPanel: FC = () => {
   const [message, setMessage] = useState<string>("");
-  const { globalState, updateState } = useContext(AppContext);
+  const { globalState, addMessage } = useContext(AppContext);
   const alert = useAlert();
 
   useEffect(() => {
     globalState.socketClient
       ?.connect()
-      .then((callback: any) => console.log(callback));
+      .then(() => console.log("Socket Connected"));
 
     globalState.socketClient?.on("output", (output: SocketMessage) => {
       if (output?.text) {
-        updateState({
-          messages: [
-            ...globalState.messages,
-            { text: output.text, type: INCOMING },
-          ],
-        });
+        addMessage({ text: output.text, type: INCOMING });
       }
     });
-  }, [globalState.socketClient, updateState, globalState.messages]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [globalState.socketClient]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!message) return;
 
     const response = await sendMessage(globalState.socketClient, message);
 
     if (response) {
       setMessage("");
-      updateState({
-        messages: [...globalState.messages, { text: message, type: OUTGOING }],
-      });
+      addMessage({ text: message, type: OUTGOING });
     } else {
       alert.show("Something wrong happened. Please try again!");
     }

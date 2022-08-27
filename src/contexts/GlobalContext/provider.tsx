@@ -35,6 +35,8 @@ const GlobalContextProvider: FC<GlobalContextProviderProps> = ({
   }, [mobileScreen]);
 
   useEffect(() => {
+    if (state.socketClient) return;
+
     const client = initSocketClient();
 
     if (client) dispatch({ type: actions.SET_SOCKET_CLIENT, payload: client });

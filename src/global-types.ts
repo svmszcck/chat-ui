@@ -3,7 +3,7 @@ import { MessageDirection } from "components/Message";
 export type GlobalState = {
   loading: boolean;
   socketClient: any;
-  messages: string[];
+  messages: ChatMessage[];
 };
 
 export type SocketMessage = {

@@ -2,8 +2,9 @@ import React, { FC, ReactNode } from "react";
 import styled from "styled-components";
 
 import Colors from "constants/colors";
+import { INCOMING, OUTGOING } from "constants/general";
 
-export type MessageDirection = "incoming" | "outgoing";
+export type MessageDirection = typeof INCOMING | typeof OUTGOING;
 
 type MessageProps = {
   direction: MessageDirection;
@@ -15,7 +16,11 @@ type StyledProps = {
 };
 
 export const Message: FC<MessageProps> = ({ children, direction }) => {
-  return <Styled incoming={direction === "incoming"}>{children}</Styled>;
+  return (
+    <Styled incoming={direction === INCOMING} data-testid="message">
+      {children}
+    </Styled>
+  );
 };
 
 const Styled = styled.div<StyledProps>`

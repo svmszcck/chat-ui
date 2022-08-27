@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { nanoid } from "nanoid";
 
-import { Button, Input, Message, History } from "components";
+import { Button, Input, Message, History, Text } from "components";
 import Colors from "constants/colors";
+import { INCOMING, OUTGOING } from "constants/general";
 import AppContext from "app-context";
-import { SocketMessage } from "global-types";
+import { ChatMessage, SocketMessage } from "global-types";
 import { sendMessage } from "services/message";
+import Cat from "assets/cat.png";
 
 type StyledProps = {
   isMobile: boolean;
@@ -22,9 +25,16 @@ const ChatPanel: FC = () => {
       .then((callback: any) => console.log(callback));
 
     globalState.socketClient?.on("output", (output: SocketMessage) => {
-      console.log("Text: " + output.text + "   Data: " + output.data);
+      if (output?.text) {
+        updateState({
+          messages: [
+            ...globalState.messages,
+            { text: output.text, type: INCOMING },
+          ],
+        });
+      }
     });
-  }, [globalState.socketClient]);
+  }, [globalState.socketClient, globalState.messages, message, updateState]);
 
   const handleSubmit = async () => {
     if (!message) return;
@@ -32,11 +42,9 @@ const ChatPanel: FC = () => {
     const response = await sendMessage(globalState.socketClient, message);
 
     if (response) {
+      setMessage("");
       updateState({
-        messages: [
-          ...globalState.messages,
-          { text: message, type: "outgoing" },
-        ],
+        messages: [...globalState.messages, { text: message, type: OUTGOING }],
       });
     }
   };
@@ -44,25 +52,20 @@ const ChatPanel: FC = () => {
   return (
     <Styled isMobile={globalState.isMobile}>
       <div className="wrapper">
-        <History>
-          <Message direction="incoming">
-            Terejrghhjw erghjwgejrhgwjehrgwjherg wjhegrhjwegrhwegrjhwge
-            rghwergwhjergwjhergjhghjhjg hgwergjwehrgjhwjehrjkwherkj
-            hwekjrhwkjerhkjwehrkjwehrkjjehjertjhertjhegrthjg user
-          </Message>
-          <Message direction="outgoing">hello bot</Message>
-          <Message direction="outgoing">hello bot</Message>
-          <Message direction="outgoing">hello bot</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="outgoing">hello bot</Message>
-          <Message direction="outgoing">hello bot</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="incoming">hello user</Message>
-          <Message direction="incoming">hello user</Message>
-        </History>
+        {globalState.messages.length === 0 ? (
+          <div className="no-message">
+            <img src={Cat} alt="No Message" width={200} />
+            <Text variant="h4">There isn't any message to show yet!</Text>
+          </div>
+        ) : (
+          <History>
+            {globalState.messages.map((message: ChatMessage) => (
+              <Message direction={message.type} key={nanoid()}>
+                <Text>{message.text}</Text>
+              </Message>
+            ))}
+          </History>
+        )}
         <div className="bottom-section">
           <Input value={message} onChange={(e) => setMessage(e.target.value)} />
           <Button
@@ -81,19 +84,27 @@ const Styled = styled.div<StyledProps>`
   width: ${({ isMobile }) => (isMobile ? "100%" : "60%")};
 
   .wrapper {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    margin: ${({ isMobile }) => (isMobile ? "1rem" : "5rem")};
+    margin: ${({ isMobile }) => (isMobile ? "1rem" : "5% 10%")};
     padding: 1rem;
-    padding-bottom: 4rem;
     background-color: ${Colors.WHITE};
     border-radius: 15px;
 
+    .no-message {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
     .bottom-section {
       display: flex;
+      margin-top: auto;
 
       .submit {
         margin-left: 1rem;

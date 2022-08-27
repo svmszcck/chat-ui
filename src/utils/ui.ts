@@ -48,6 +48,11 @@ export const handleTextVariant = (variant: TextVariant) => {
         fontSize: "1.5rem",
         fontWeight: "bold",
       };
+    case "h4":
+      return {
+        fontSize: "1.2rem",
+        fontWeight: "bold",
+      };
     default:
       return {
         fontSize: "1rem",

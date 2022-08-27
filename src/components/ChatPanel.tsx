@@ -1,10 +1,12 @@
-import React, { useContext, useState, FC } from "react";
+import React, { useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import { Button, Input, Message, History } from "components";
 import Colors from "constants/colors";
 import AppContext from "app-context";
+import { SocketMessage } from "global-types";
+import { sendMessage } from "services/message";
 
 type StyledProps = {
   isMobile: boolean;
@@ -12,15 +14,42 @@ type StyledProps = {
 
 const ChatPanel: FC = () => {
   const [message, setMessage] = useState<string>("");
-  const { globalState } = useContext(AppContext);
+  const { globalState, updateState } = useContext(AppContext);
 
-  const handleSubmit = () => {};
+  useEffect(() => {
+    globalState.socketClient
+      ?.connect()
+      .then((callback: any) => console.log(callback));
+
+    globalState.socketClient?.on("output", (output: SocketMessage) => {
+      console.log("Text: " + output.text + "   Data: " + output.data);
+    });
+  }, [globalState.socketClient]);
+
+  const handleSubmit = async () => {
+    if (!message) return;
+
+    const response = await sendMessage(globalState.socketClient, message);
+
+    if (response) {
+      updateState({
+        messages: [
+          ...globalState.messages,
+          { text: message, type: "outgoing" },
+        ],
+      });
+    }
+  };
 
   return (
     <Styled isMobile={globalState.isMobile}>
       <div className="wrapper">
         <History>
-          <Message direction="incoming">hello user</Message>
+          <Message direction="incoming">
+            Terejrghhjw erghjwgejrhgwjehrgwjherg wjhegrhjwegrhwegrjhwge
+            rghwergwhjergwjhergjhghjhjg hgwergjwehrgjhwjehrjkwherkj
+            hwekjrhwkjerhkjwehrkjwehrkjjehjertjhertjhegrthjg user
+          </Message>
           <Message direction="outgoing">hello bot</Message>
           <Message direction="outgoing">hello bot</Message>
           <Message direction="outgoing">hello bot</Message>

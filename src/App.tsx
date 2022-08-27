@@ -5,9 +5,12 @@ import Router from "router";
 import AppContext from "app-context";
 import { isMobile } from "utils/ui";
 import useWindowDimensions from "hooks/useWindowDimensions";
+import { initSocketClient } from "utils/general";
 
 const initialState: GlobalState = {
   loading: false,
+  socketClient: null,
+  messages: [],
 };
 
 const App = () => {
@@ -18,6 +21,12 @@ const App = () => {
     ...initialState,
     isMobile: isMobile(width),
   });
+
+  useEffect(() => {
+    const client = initSocketClient();
+
+    if (client) updateState({ socketClient: client });
+  }, []);
 
   useEffect(() => {
     updateState({ isMobile: mobileScreen });

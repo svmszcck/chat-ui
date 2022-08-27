@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from "react";
+import React, { FC, ChangeEvent } from "react";
 import styled from "styled-components";
 
 import Colors from "constants/colors";
@@ -9,16 +9,14 @@ type InputProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Input: FC<InputProps> = ({ onSubmit }) => {
-  const [message, setMessage] = useState("");
-
+export const Input: FC<InputProps> = ({ value, onChange }) => {
   return (
     <Styled
       className="input"
       placeholder="Type your message..."
       autoFocus
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
+      value={value}
+      onChange={onChange}
     ></Styled>
   );
 };

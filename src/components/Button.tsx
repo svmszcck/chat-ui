@@ -62,7 +62,7 @@ const Styled = styled.div<StyledProps>`
   ${({ variant }) => handleButtonVariant(variant)}
 
   ${({ isMobile }) =>
-    isMobile && "padding: 0; width: 50px; height: 50px; border-radius: 50%;"};
+    isMobile && "padding: 0; width: 40px; height: 40px; border-radius: 50%;"};
 
   &:hover {
     opacity: 0.9;

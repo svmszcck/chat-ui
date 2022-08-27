@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "nanoid";
+import { useAlert } from "react-alert";
 
 import { Button, Input, Message, History, Text } from "components";
 import Colors from "constants/colors";
@@ -18,6 +19,7 @@ type StyledProps = {
 const ChatPanel: FC = () => {
   const [message, setMessage] = useState<string>("");
   const { globalState, updateState } = useContext(AppContext);
+  const alert = useAlert();
 
   useEffect(() => {
     globalState.socketClient
@@ -34,18 +36,22 @@ const ChatPanel: FC = () => {
         });
       }
     });
-  }, [globalState.socketClient, globalState.messages, message, updateState]);
+  }, [globalState.socketClient, updateState, globalState.messages]);
 
   const handleSubmit = async () => {
     if (!message) return;
 
     const response = await sendMessage(globalState.socketClient, message);
 
+    console.log("girdiiiii");
+
     if (response) {
       setMessage("");
       updateState({
         messages: [...globalState.messages, { text: message, type: OUTGOING }],
       });
+    } else {
+      alert.show("Something wrong happened. Please try again!");
     }
   };
 
@@ -67,7 +73,11 @@ const ChatPanel: FC = () => {
           </History>
         )}
         <div className="bottom-section">
-          <Input value={message} onChange={(e) => setMessage(e.target.value)} />
+          <Input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onSubmit={handleSubmit}
+          />
           <Button
             className="submit"
             text="Send Message"

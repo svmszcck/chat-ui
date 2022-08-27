@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Provider as AlertProvider } from "react-alert";
 
 import { GlobalState } from "global-types";
 import Router from "router";
@@ -6,6 +7,9 @@ import AppContext from "app-context";
 import { isMobile } from "utils/ui";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import { initSocketClient } from "utils/general";
+import { alertConfig } from "constants/config";
+
+const alertTemplate = require("react-alert-template-basic").default;
 
 const initialState: GlobalState = {
   loading: false,
@@ -38,7 +42,13 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ globalState, updateState }}>
-      <Router />
+      <AlertProvider
+        template={alertTemplate}
+        {...alertConfig}
+        containerStyle={{ textTransform: "lowercase" }}
+      >
+        <Router />
+      </AlertProvider>
     </AppContext.Provider>
   );
 };

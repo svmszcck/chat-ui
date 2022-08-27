@@ -1,15 +1,22 @@
-import React, { FC, ChangeEvent } from "react";
+import React, { FC, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 
 import Colors from "constants/colors";
+import { ENTER_KEY } from "constants/general";
 
 type InputProps = {
-  onSubmit?: (message: string) => void;
+  onSubmit?: () => void;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Input: FC<InputProps> = ({ value, onChange }) => {
+export const Input: FC<InputProps> = ({ value, onChange, onSubmit }) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === ENTER_KEY) {
+      onSubmit?.();
+    }
+  };
+
   return (
     <Styled
       className="input"
@@ -17,6 +24,7 @@ export const Input: FC<InputProps> = ({ value, onChange }) => {
       autoFocus
       value={value}
       onChange={onChange}
+      onKeyDown={handleKeyDown}
     ></Styled>
   );
 };

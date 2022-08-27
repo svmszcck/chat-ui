@@ -21,3 +21,5 @@ export const Message: FC<MessageProps> = ({ children, direction }) => {
     </div>
   );
 };
+
+export default Message;

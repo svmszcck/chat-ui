@@ -21,3 +21,5 @@ export const History: FC<HistoryProps> = ({ children }) => {
     </div>
   );
 };
+
+export default History;

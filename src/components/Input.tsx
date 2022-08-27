@@ -32,3 +32,5 @@ export const Input: FC<InputProps> = ({ onSubmit }) => {
     </form>
   );
 };
+
+export default Input;

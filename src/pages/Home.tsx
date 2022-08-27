@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { GlobalState } from "global-types";
-import Router from "router";
-import AppContext from "app-context";
+import { Input, Message, History } from "components";
 
 /**
  * 1. Implement state management.
@@ -36,24 +33,26 @@ import AppContext from "app-context";
  * When the message history is "full", it should automatically scroll to the bottom when new content arrives.
  */
 
-const initialState: GlobalState = {
-  loading: false,
-};
-
-const App = () => {
-  const [globalState, setGlobalState] = useState({
-    ...initialState,
-  });
-
-  const updateState = (value: object) => {
-    setGlobalState((globalState) => ({ ...globalState, ...value }));
-  };
-
+const Home = () => {
   return (
-    <AppContext.Provider value={{ globalState, updateState }}>
-      <Router />
-    </AppContext.Provider>
+    <div
+      style={{
+        width: 300,
+        height: 400,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <History>
+        {/* TODO: replace with dynamic rendering */}
+        <Message direction="incoming">hello user</Message>
+        <Message direction="outgoing">hello bot</Message>
+      </History>
+
+      {/* TODO: send message on submit */}
+      <Input />
+    </div>
   );
 };
 
-export default App;
+export default Home;

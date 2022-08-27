@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import { Button, Input, Message, History, Text } from "components";
 import Colors from "constants/colors";
 import { INCOMING, OUTGOING } from "constants/general";
-import AppContext from "app-context";
+import AppContext from "contexts/GlobalContext";
 import { ChatMessage, SocketMessage } from "global-types";
 import { sendMessage } from "services/message";
 import Cat from "assets/cat.png";

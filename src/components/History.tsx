@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, FC, ReactNode } from "react";
 import styled from "styled-components";
 
-import AppContext from "app-context";
+import AppContext from "contexts/GlobalContext";
 import { SCROLL_AUTO } from "constants/general";
 
 type HistoryProps = {

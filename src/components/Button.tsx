@@ -6,7 +6,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { handleButtonVariant } from "utils/ui";
 import Colors from "constants/colors";
 import { Text } from "components";
-import AppContext from "app-context";
+import AppContext from "contexts/GlobalContext";
 
 export type ButtonVariant = "primary" | "danger";
 

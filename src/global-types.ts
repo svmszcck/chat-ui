@@ -1,11 +1,5 @@
 import { MessageDirection } from "components/Message";
 
-export type GlobalState = {
-  loading: boolean;
-  socketClient: any;
-  messages: ChatMessage[];
-};
-
 export type SocketMessage = {
   text: string;
   data: string;
@@ -14,4 +8,18 @@ export type SocketMessage = {
 export type ChatMessage = {
   text: string;
   type: MessageDirection;
+};
+
+// State Types
+
+export type GlobalState = {
+  loading: boolean;
+  socketClient: any;
+  messages: ChatMessage[];
+  isMobile: boolean | null;
+};
+
+export type Action = {
+  type: string;
+  payload: any;
 };

@@ -1,7 +1,7 @@
 import React, { useContext, FC } from "react";
 
 import { ChatPanel } from "components";
-import AppContext from "app-context";
+import AppContext from "contexts/GlobalContext";
 
 import Styled from "./styles";
 

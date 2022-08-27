@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, FC } from "react";
+import { useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "nanoid";
@@ -62,13 +62,15 @@ const ChatPanel: FC = () => {
             <Text variant="h4">There isn't any message to show yet!</Text>
           </div>
         ) : (
-          <History>
-            {globalState.messages.map((message: ChatMessage) => (
-              <Message direction={message.type} key={nanoid()}>
-                <Text>{message.text}</Text>
-              </Message>
-            ))}
-          </History>
+          <>
+            <History>
+              {globalState.messages.map((message: ChatMessage) => (
+                <Message direction={message.type} key={nanoid()}>
+                  <Text>{message.text}</Text>
+                </Message>
+              ))}
+            </History>
+          </>
         )}
         <div className="bottom-section">
           <Input

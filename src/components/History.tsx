@@ -1,7 +1,8 @@
-import React, { useContext, FC, ReactNode } from "react";
+import { useContext, useEffect, useRef, FC, ReactNode } from "react";
 import styled from "styled-components";
 
 import AppContext from "app-context";
+import { SCROLL_AUTO } from "constants/general";
 
 type HistoryProps = {
   children?: ReactNode;
@@ -13,8 +14,17 @@ type StyledProps = {
 
 export const History: FC<HistoryProps> = ({ children }) => {
   const { globalState } = useContext(AppContext);
+  const bottomRef = useRef<null | HTMLDivElement>(null);
 
-  return <Styled isMobile={globalState.isMobile}>{children}</Styled>;
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: SCROLL_AUTO });
+  }, [globalState.messages]);
+
+  return (
+    <Styled isMobile={globalState.isMobile}>
+      {children} <div ref={bottomRef} />
+    </Styled>
+  );
 };
 
 const Styled = styled.div<StyledProps>`

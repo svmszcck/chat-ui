@@ -1,4 +1,9 @@
-import { Input, Message, History } from "components";
+import React, { useContext, FC } from "react";
+
+import AppContext from "app-context";
+import { ChatPanel } from "components";
+
+import Styled from "./styles";
 
 /**
  * 1. Implement state management.
@@ -33,25 +38,13 @@ import { Input, Message, History } from "components";
  * When the message history is "full", it should automatically scroll to the bottom when new content arrives.
  */
 
-const Home = () => {
-  return (
-    <div
-      style={{
-        width: 300,
-        height: 400,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <History>
-        {/* TODO: replace with dynamic rendering */}
-        <Message direction="incoming">hello user</Message>
-        <Message direction="outgoing">hello bot</Message>
-      </History>
+const Home: FC = () => {
+  const { globalState } = useContext(AppContext);
 
-      {/* TODO: send message on submit */}
-      <Input />
-    </div>
+  return (
+    <Styled>
+      <ChatPanel isMobile={globalState.isMobile} />
+    </Styled>
   );
 };
 

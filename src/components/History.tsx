@@ -1,25 +1,29 @@
-import React, { FC, ReactNode } from "react";
+import React, { useContext, FC, ReactNode } from "react";
+import styled from "styled-components";
+
+import AppContext from "app-context";
 
 type HistoryProps = {
   children?: ReactNode;
 };
 
-export const History: FC<HistoryProps> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        border: "1px solid black",
-        padding: 10,
-        flexGrow: 1,
-        overflow: "auto",
-      }}
-    >
-      {children}
-    </div>
-  );
+type StyledProps = {
+  isMobile: boolean;
 };
+
+export const History: FC<HistoryProps> = ({ children }) => {
+  const { globalState } = useContext(AppContext);
+
+  return <Styled isMobile={globalState.isMobile}>{children}</Styled>;
+};
+
+const Styled = styled.div<StyledProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  flex-grow: 1;
+  overflow: auto;
+`;
 
 export default History;

@@ -1,5 +1,5 @@
 :root {
-  --primary: #f4f7fb;
+  --gray-light: #e7e8ea;
 }
 
 body {
@@ -10,5 +10,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--primary);
+  background-color: var(--gray-light);
 }

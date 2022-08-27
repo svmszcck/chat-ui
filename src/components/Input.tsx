@@ -1,4 +1,5 @@
 import React, { FC, FormEventHandler, useState } from "react";
+import styled from "styled-components";
 
 type InputProps = {
   onSubmit?: (message: string) => void;
@@ -17,10 +18,7 @@ export const Input: FC<InputProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form
-      style={{ display: "flex", alignItems: "stretch" }}
-      onSubmit={handleSubmit}
-    >
+    <Styled onSubmit={handleSubmit}>
       <input
         style={{ flexGrow: 1, border: "1px solid black", padding: 5 }}
         placeholder="type here"
@@ -29,8 +27,13 @@ export const Input: FC<InputProps> = ({ onSubmit }) => {
         onChange={(e) => setMessage(e.target.value)}
       />
       <button style={{ border: "1px solid black", padding: 5 }}>submit</button>
-    </form>
+    </Styled>
   );
 };
+
+const Styled = styled.form`
+  display: flex;
+  align-items: stretch;
+`;
 
 export default Input;

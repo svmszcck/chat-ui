@@ -21,9 +21,10 @@ const Styled = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1rem;
   flex-grow: 1;
   overflow: auto;
+  margin-bottom: 2rem;
+  max-height: 20rem;
 `;
 
 export default History;

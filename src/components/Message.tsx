@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import styled from "styled-components";
 
 type MessageDirection = "incoming" | "outgoing";
 
@@ -7,19 +8,21 @@ type MessageProps = {
   children?: ReactNode;
 };
 
-export const Message: FC<MessageProps> = ({ children, direction }) => {
-  return (
-    <div
-      style={{
-        alignSelf: direction === "incoming" ? "flex-start" : "flex-end",
-        border: "1px solid black",
-        padding: 5,
-        borderRadius: 5,
-      }}
-    >
-      {children}
-    </div>
-  );
+type StyledProps = {
+  incoming: boolean;
 };
+
+export const Message: FC<MessageProps> = ({ children, direction }) => {
+  return <Styled incoming={direction === "incoming"}>{children}</Styled>;
+};
+
+const Styled = styled.div<StyledProps>`
+  display: flex;
+  align-items: stretch;
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 5px;
+  align-self: ${({ incoming }) => (incoming ? "flex-start" : "flex-end")};
+`;
 
 export default Message;

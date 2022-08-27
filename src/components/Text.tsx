@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties, MouseEventHandler } from "react";
 import styled from "styled-components";
 
 import { handleTextVariant } from "utils/ui";
@@ -10,15 +10,27 @@ type TextProps = {
   variant?: TextVariant;
   style?: CSSProperties;
   className?: string;
+  onClick?: MouseEventHandler<HTMLElement>;
 };
 
 type StyledProps = {
   variant: TextVariant;
 };
 
-const Text = ({ children, variant = "p", style, className }: TextProps) => {
+const Text = ({
+  children,
+  variant = "p",
+  style,
+  className,
+  onClick,
+}: TextProps) => {
   return (
-    <Styled variant={variant} className={className} style={style}>
+    <Styled
+      variant={variant}
+      className={className}
+      style={style}
+      onClick={onClick}
+    >
       {children}
     </Styled>
   );

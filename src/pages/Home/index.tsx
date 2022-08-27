@@ -1,4 +1,4 @@
-import React, { useContext, FC } from "react";
+import { useContext, FC } from "react";
 
 import { ChatPanel } from "components";
 import AppContext from "contexts/GlobalContext";

@@ -25,6 +25,7 @@ const Header = () => {
               title: "Warning!",
               text: "Not implemented yet",
               icon: "warning",
+              confirmButtonText: "Okay",
             })
           }
         >

@@ -1,16 +1,15 @@
 :root {
-  --gray-light: #e7e8ea;
+  --gray: #e7e8ea;
 }
 
 body {
   margin: 0;
-  /* padding: 3rem; */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--gray-light);
+  background-color: var(--gray);
 }
 
 html,
@@ -19,13 +18,7 @@ body {
   margin: 0;
 }
 
-/*
-@media screen and (max-width: 768px) {
-  body {
-    padding: 1.5rem;
-  }
-}
-*/
+/* Custom Scrollbar style */
 
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);

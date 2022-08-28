@@ -22,7 +22,7 @@ https://codesandbox.io/s/github/svmszcck/chat-ui
 
 # Architecture
 
-I have also separated services & constants & config variables as separate files.
+I have separated services & constants & config variables as separate files.
 
 Let me show the folder structure:
 
@@ -78,6 +78,7 @@ In order to run all of the tests please do "yarn test". You need to install jest
 If you want to run a single test, you can do this: "jest filename.test.js".
 
 <br>
+
 # Pros & Cons
 
 **Pros:**

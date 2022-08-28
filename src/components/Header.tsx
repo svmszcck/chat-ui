@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useAlert } from "react-alert";
+import Swal from "sweetalert2";
 
 import { Text } from "components";
 import AppRoutes from "constants/routes";
 
 const Header = () => {
   let navigate = useNavigate();
-  const alert = useAlert();
 
   return (
     <Styled>
@@ -21,7 +20,13 @@ const Header = () => {
         </Text>
         <Text
           className="option right-section"
-          onClick={() => alert.show("Not implemented yet!")}
+          onClick={() =>
+            Swal.fire({
+              title: "Warning!",
+              text: "Not implemented yet",
+              icon: "warning",
+            })
+          }
         >
           Login
         </Text>

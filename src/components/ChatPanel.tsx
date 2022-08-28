@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "nanoid";
-import { useAlert } from "react-alert";
+import Swal from "sweetalert2";
 
 import { Button, Input, Message, History, Text } from "components";
 import Colors from "constants/colors";
@@ -19,7 +19,6 @@ type StyledProps = {
 const ChatPanel: FC = () => {
   const [message, setMessage] = useState<string>("");
   const { globalState, addMessage } = useContext(AppContext);
-  const alert = useAlert();
 
   useEffect(() => {
     globalState.socketClient
@@ -50,7 +49,11 @@ const ChatPanel: FC = () => {
       setMessage("");
       addMessage({ text: message, type: OUTGOING });
     } else {
-      alert.show("Something wrong happened. Please try again!");
+      Swal.fire({
+        title: "Warning!",
+        text: "Something wrong happened. Please try again!",
+        icon: "warning",
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);

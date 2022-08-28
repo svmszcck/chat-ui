@@ -10,6 +10,8 @@ import { INCOMING, OUTGOING } from "constants/general";
 import AppContext from "contexts/GlobalContext";
 import { ChatMessage, SocketMessage } from "global-types";
 import { sendMessage } from "services/messages";
+import { validateMessage } from "utils/validation";
+
 import Cat from "assets/cat.png";
 
 type StyledProps = {
@@ -41,12 +43,13 @@ const ChatPanel: FC = () => {
   };
 
   const handleSubmit = useCallback(async () => {
-    if (!message) return;
+    setMessage("");
+
+    if (!validateMessage(message)) return;
 
     const response = await sendMessage(globalState.socketClient, message);
 
     if (response) {
-      setMessage("");
       addMessage({ text: message, type: OUTGOING });
     } else {
       Swal.fire({

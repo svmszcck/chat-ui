@@ -11,9 +11,13 @@ const App = () => {
   return (
     <GlobalContextProvider>
       <AlertProvider
-        template={alertTemplate}
+        template={(props) =>
+          alertTemplate({
+            ...props,
+            style: { textTransform: "none", marginBottom: 20 },
+          })
+        }
         {...alertConfig}
-        containerStyle={{ textTransform: "lowercase" }}
       >
         <Router />
       </AlertProvider>

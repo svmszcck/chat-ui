@@ -9,7 +9,7 @@ import Colors from "constants/colors";
 import { INCOMING, OUTGOING } from "constants/general";
 import AppContext from "contexts/GlobalContext";
 import { ChatMessage, SocketMessage } from "global-types";
-import { sendMessage } from "services/message";
+import { sendMessage } from "services/messages";
 import Cat from "assets/cat.png";
 
 type StyledProps = {
@@ -26,13 +26,20 @@ const ChatPanel: FC = () => {
       ?.connect()
       .then(() => console.log("Socket Connected"));
 
-    globalState.socketClient?.on("output", (output: SocketMessage) => {
-      if (output?.text) {
-        addMessage({ text: output.text, type: INCOMING });
-      }
-    });
+    globalState.socketClient?.on("output", onMessageReceive);
+
+    return () => {
+      globalState.socketClient?.removeListener("output", onMessageReceive);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [globalState.socketClient]);
+
+  const onMessageReceive = (output: SocketMessage) => {
+    if (output?.text) {
+      addMessage({ text: output.text, type: INCOMING });
+    }
+  };
 
   const handleSubmit = async (): Promise<void> => {
     if (!message) return;

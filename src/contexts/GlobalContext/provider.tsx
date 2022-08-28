@@ -40,6 +40,7 @@ const GlobalContextProvider: FC<GlobalContextProviderProps> = ({
     const client = initSocketClient();
 
     if (client) dispatch({ type: actions.SET_SOCKET_CLIENT, payload: client });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = {

@@ -22,7 +22,8 @@ export const History: FC<HistoryProps> = ({ children }) => {
 
   return (
     <Styled isMobile={globalState.isMobile}>
-      {children} <div ref={bottomRef} />
+      {children}
+      <div ref={bottomRef} />
     </Styled>
   );
 };

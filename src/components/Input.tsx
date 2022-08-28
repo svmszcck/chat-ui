@@ -25,6 +25,7 @@ export const Input: FC<InputProps> = ({ value, onChange, onSubmit }) => {
       value={value}
       onChange={onChange}
       onKeyDown={handleKeyDown}
+      data-testid="input"
     ></Styled>
   );
 };

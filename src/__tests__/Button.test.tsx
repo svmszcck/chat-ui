@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import AppContext from "app-context";
+import AppContext from "contexts/GlobalContext/index";
 import { Button } from "components";
 
 describe("Button Component", () => {

@@ -30,7 +30,7 @@ const Styled = styled.div<StyledProps>`
   padding: 0.5rem;
   border-radius: 5px;
   align-self: ${({ incoming }) => (incoming ? "flex-start" : "flex-end")};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
   background-color: ${({ incoming }) => (incoming ? Colors.GRAY : Colors.BLUE)};
   color: ${({ incoming }) => (incoming ? Colors.BLACK : Colors.WHITE)};
   word-wrap: break-word;

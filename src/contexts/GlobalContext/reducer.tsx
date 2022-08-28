@@ -20,7 +20,7 @@ const reducer = (state: GlobalState, action: Action): GlobalState => {
         isMobile: action.payload,
       };
     default:
-      throw new Error();
+      return state;
   }
 };
 

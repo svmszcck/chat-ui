@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, FC } from "react";
+import { useCallback, useContext, useEffect, useState, FC } from "react";
 import styled from "styled-components";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "nanoid";
@@ -41,7 +41,7 @@ const ChatPanel: FC = () => {
     }
   };
 
-  const handleSubmit = async (): Promise<void> => {
+  const handleSubmit = useCallback(async () => {
     if (!message) return;
 
     const response = await sendMessage(globalState.socketClient, message);
@@ -52,7 +52,8 @@ const ChatPanel: FC = () => {
     } else {
       alert.show("Something wrong happened. Please try again!");
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   return (
     <Styled isMobile={globalState.isMobile}>

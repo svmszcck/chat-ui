@@ -6,6 +6,10 @@ https://codesandbox.io/s/github/svmszcck/chat-ui
 
 <br>
 
+<img src="https://i.ibb.co/23sjGr6/Screenshot-2022-08-28-at-09-54-52.png" >
+
+<br>
+
 **Used Technologies:**
 
 - React

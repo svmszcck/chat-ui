@@ -109,7 +109,7 @@ const Styled = styled.div<StyledProps>`
     bottom: 0;
     left: 0;
     right: 0;
-    margin: ${({ isMobile }) => (isMobile ? "1rem" : "5% 10%")};
+    margin: ${({ isMobile }) => (isMobile ? "1rem" : "5rem 10%")};
     padding: 1rem;
     background-color: ${Colors.WHITE};
     border-radius: 15px;

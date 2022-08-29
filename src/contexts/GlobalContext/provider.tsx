@@ -45,10 +45,10 @@ const GlobalContextProvider: FC<GlobalContextProviderProps> = ({
 
   const value = {
     globalState: state,
-    addMessage: (message: ChatMessage) => {
+    addMessage: (message: ChatMessage): void => {
       dispatch({ type: actions.ADD_MESSAGE, payload: message });
     },
-    setSocketClient: (client: any) => {
+    setSocketClient: (client: any): void => {
       dispatch({ type: actions.SET_SOCKET_CLIENT, payload: client });
     },
     isMobile: isMobile(width),

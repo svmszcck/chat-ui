@@ -35,7 +35,6 @@ const Styled = styled.div<StyledProps>`
   flex-grow: 1;
   overflow: auto;
   margin-bottom: 2rem;
-  // max-height: ${({ isMobile }) => (isMobile ? "100%" : "20rem")};
   height: fill-available;
 
   ${({ isMobile }) =>

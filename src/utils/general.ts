@@ -3,7 +3,7 @@ import { SocketClient } from "@cognigy/socket-client";
 const { REACT_APP_ENDPOINT_BASE_URL, REACT_APP_ENDPOINT_URL_TOKEN } =
   process.env;
 
-export const initSocketClient = () => {
+export const initSocketClient = (): SocketClient | undefined => {
   try {
     if (REACT_APP_ENDPOINT_BASE_URL && REACT_APP_ENDPOINT_URL_TOKEN) {
       const client = new SocketClient(

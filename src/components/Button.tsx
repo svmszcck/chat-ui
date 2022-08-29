@@ -59,7 +59,7 @@ const Styled = styled.div<StyledProps>`
   color: ${Colors.WHITE};
   border-radius: 5px;
   font-weight: 500;
-  ${({ variant }) => handleButtonVariant(variant)}
+  ${({ variant }) => handleButtonVariant(variant)};
 
   ${({ isMobile }) =>
     isMobile && "padding: 0; width: 40px; height: 40px; border-radius: 50%;"};

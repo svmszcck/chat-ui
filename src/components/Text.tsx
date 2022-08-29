@@ -38,7 +38,7 @@ const Text = ({
 
 const Styled = styled.p<StyledProps>`
   margin: 0;
-  ${({ variant }) => handleTextVariant(variant)}
+  ${({ variant }) => handleTextVariant(variant)};
 `;
 
 export default Text;

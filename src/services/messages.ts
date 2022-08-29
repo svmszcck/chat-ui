@@ -1,4 +1,9 @@
-export const sendMessage = async (client: any, text: string) => {
+import { SocketClient } from "@cognigy/socket-client";
+
+export const sendMessage = async (
+  client: any,
+  text: string
+): Promise<SocketClient | undefined> => {
   try {
     const response = await client.sendMessage(text);
 
